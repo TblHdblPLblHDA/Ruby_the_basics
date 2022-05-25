@@ -1,15 +1,15 @@
-puts "Введите а"
+puts "enter а"
   a = gets.to_i
-puts "Введите b"
+puts "enter b"
   b = gets.to_i
-puts "Введите c"
+puts "enter c"
   c = gets.to_i
 
 d = b**2 - 4 * a * c
 puts "d = b**2 - 4 * a * c"
 
 if d < 0
-  print "Корней нет"
+  print "There are no roots"
 elsif
   x1 = (-b + Math.sqrt(d)) / (2 * a)
   x2 = (-b - Math.sqrt(d)) / (2 * a)
