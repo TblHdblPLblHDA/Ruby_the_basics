@@ -14,7 +14,7 @@ elsif
   x1 = (-b + Math.sqrt(d)) / (2 * a)
   x2 = (-b - Math.sqrt(d)) / (2 * a)
   puts "x1 = -b + Math.sqrt(d)) / (2 * a)
-  x2 = -b - Math.sqrt(d)) / (2*a)"
+  x2 = -b - Math.sqrt(d)) / (2 * a)"
 
   puts "x1 = (-#{b} + Math.sqrt(#{d})) / (2 * #{a})
   x2 = (-#{b} - Math.sqrt(#{d})) / (2 * #{a}) "
