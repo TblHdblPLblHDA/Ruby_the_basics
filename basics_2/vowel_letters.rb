@@ -1,4 +1,4 @@
-letters = [ 'A', 'E', 'O', 'I', 'U', 'Y',]
+letters = ['A', 'E', 'O', 'I', 'U', 'Y']
 hash = Hash.new ()
 
 letters.each do |letter|

@@ -19,13 +19,14 @@ years = {
   11 => 30,
   12 => 31,
 }
-years[2] = 29 
+#А здесь, видимо, при сохранении нажал кнопку и условие улетело...
 if year % 400 == 0 || year % 4 == 0 && year % 100 != 0
+  years[2] = 29 
 end
 
 date_number = 0
 years.each do |months, days|
-  date_number += days if months == month
+  date_number += day if months == month #Здесь добавил одну лишнюю букву в "day"
   date_number += days if months < month
 end
 
