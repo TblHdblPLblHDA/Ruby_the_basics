@@ -6,15 +6,15 @@ class Station
 
   def add_train(train) #Может принимать поезда (по одному за раз)
     return if @trains.include?(train)
-    @trains << train
+    @trains << train # Пропустил букву s
   end
 
   def train_list #Может возвращать список всех поездов на станции, находящиеся в текущий момент
-    @train
+    @trains
   end
 
   def train_list_type(type) #Может возвращать список поездов на станции по типу (см. ниже): кол-во грузовых, пассажирских
-    @train.select do |train|
+    @trains.select do |train| #Стояла класс train, Хотя должен был быть trains. 
       train.type == type
     end
   end
@@ -26,28 +26,28 @@ class Station
 end
 
 class Route
-  attr_reader :first, :last, :station
+  attr_reader :first, :last, :stations
   def initialize(first, last) # Имеет начальную и конечную станцию. Начальная и конечная станции указываются при создании маршрута.
     @first = first
     @last = last
-    @station = [first, last]
+    @stations = [first, last]
   end
 
-  def add_station # Промежуточные станции могут добавляться между начальной и конечной.
-    @station.insert(1, station)
+  def add_station(station) # Промежуточные станции могут добавляться между начальной и конечной.
+    @stations.insert(1, station)
   end
 
-  def delete_station # Может удалять промежуточную станцию из списка
-    @station.delete(station)
+  def delete_station(station) # Может удалять промежуточную станцию из списка
+    @stations.delete(station)
   end
 
   def show_route # Может выводить список всех станций
-    @station
+    @stations
   end
 end
 
 class Train
-  attr_reader :number, :type 
+  attr_reader :number, :type, :number_of_wagons
 
   def initialize(number, type, number_of_wagons) # Имеет номер, тип, количество вагонов (указывается при создани)
     @speed = 0
@@ -68,10 +68,6 @@ class Train
     @speed = 0
   end
 
-  def number_of_wagons # Может возвращать количество вагонов
-    @number_of_wagons
-  end
-
   def take_route(route) # Может принимать маршрут следования
     @route_for_train = route
     @pozition_on_route = 0
@@ -85,7 +81,7 @@ class Train
   end
 
   def detach_wagon # Может отцеплять вагоны, если поезд не движется
-    if @speed == 0 
+    if @speed == 0 && @number_of_wagons > 0
       @number_of_wagons -= 1
     end
   end
