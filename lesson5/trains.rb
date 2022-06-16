@@ -1,11 +1,11 @@
 class Train
   attr_reader :number, :type, :number_of_wagons
 
-  def initialize(number, type, number_of_wagons) # Имеет номер, тип, количество вагонов (указывается при создани)
+  def initialize(number) # Имеет номер, тип, количество вагонов (указывается при создани)
     @speed = 0
     @number = number
-    @type = type
-    @number_of_wagons = number_of_wagons
+    @type = nil
+    @number_of_wagons = []
   end 
  
   def speed # Может набирать скорость
@@ -27,14 +27,13 @@ class Train
   end
 
   def attach_wagon # Может прицеплять вагоны, если поезд не движется
-    if @speed == 0 
-      @number_of_wagons += 1
-    end
+    return false unless railway_wagon.type == @type
+    @number_of_wagons << railway_wagon if speed == 0
   end
 
   def detach_wagon # Может отцеплять вагоны, если поезд не движется
-    if @speed == 0 && @number_of_wagons > 0
-      @number_of_wagons -= 1
+    if @speed == 0
+      @number_of_wagons.delete(railway_wagon)
     end
   end
 
