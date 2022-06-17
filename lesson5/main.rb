@@ -39,7 +39,7 @@ when 1 # создать новую станцию
   name = gets.chomp
   puts "Station - #{name} has been add"
   stations << Station.new(name)
-end
+
 
 when 2 #создать новый поезд
   print "Enter number and type(passenger or cargo) of train"
@@ -54,10 +54,10 @@ when 2 #создать новый поезд
   else
     puts "wrong type"
   end
-end
+
 
 when 3 # создать новый маршрут
-  puts "We have #{stations.count} stations."
+  puts " stations - #{stations.count} "
   stations.each_with_index do |s, i| puts "#{i + 1}. #{s.show_title.capitalize}"
   end
   print "Chose number of the first station: "
@@ -66,13 +66,13 @@ when 3 # создать новый маршрут
   finish = gets.chomp.to_i
   routes << Route.new(stations[start - 1], stations[finish - 1])
   puts "Route from #{stations[start - 1].show_title.capitalize} to #{stations[finish - 1].show_title.capitalize} has been created!"
-end
+
 
 when 4 # добавление станции в маршрут
-  puts "We have #{stations.count} stations."
+  puts "stations what we have - #{stations.count}"
   stations.each_with_index do |s, i| puts "#{i + 1}. #{s.show_title.capitalize}"
   end
-  puts "And we have routes"
+  puts "And routes"
   routes.each_with_index do |r, i| puts "#{i + 1}. Route from #{r.first.show_title.capitalize} to #{r.last.show_title.capitalize}"
   end
   puts "Choose station: "
@@ -80,10 +80,10 @@ when 4 # добавление станции в маршрут
   puts "Choose route: "
   answer2 = gets.chomp.to_i
   routes[answer2 - 1].add_station(stations[answer - 1]) 
-end
+
 
 when 5 # назначение маршрута поезду
-  puts "We have #{trains.count} trains and #{routes.count} routes."
+  puts "trains - #{trains.count} and #{routes.count} routes."
   puts "Choose the train, to assign the route."
   trains.each_with_index do |t, i| puts "#{i + 1}. #{t.type.to_s.capitalize} train, number #{t.number}"
   end
@@ -94,7 +94,7 @@ when 5 # назначение маршрута поезду
   answer2 = gets.chomp.to_i
   trains[answer1 - 1].add_to_route(routes[answer2 - 1])
   puts "Route from #{routes[answer2 - 1].first.show_title.capitalize} to #{routes[answer2 - 1].last.show_title.capitalize} has been assign for train number #{trains[answer1 - 1].number.to_s}"
-end
+
 
 when 6 # добавление вагонов к поезду
   puts "Choose the train to add railway carriage."
@@ -107,7 +107,7 @@ when 6 # добавление вагонов к поезду
       trains[answer - 1].add_railway_wagon(RailwayWagonPassenger.new)
     end
   puts "Train number #{trains[answer - 1].number} now has #{trains[answer - 1].show_number_of_wagons} railway carriages."
-end
+
 
 when 7 # отцепка вагонов от поезда
   trains.each_with_index do |t, i| puts "#{i + 1}. #{t.type.to_s.capitalize} train, number #{t.number} with #{t.show_number_of_wagons} railway carriages"
@@ -115,7 +115,7 @@ when 7 # отцепка вагонов от поезда
   print "Choose the train to add railway carriage: "
   answer = gets.chomp.to_i
   trains[answer - 1].remove_railway_wagon(trains[answer - 1].number_of_wagons[0])
-end
+
 
 when 8 # перемещение поезда
   trains.each_with_index do |t, i| puts "#{i + 1}. #{t.type.to_s.capitalize} train, number #{t.number}"
@@ -129,16 +129,15 @@ when 8 # перемещение поезда
   elsif dir == 2
     trains[answer - 1].move_back
   end
-end
+
 
 when 9 # просмотр списка станций и список поездов
-  puts '##################################'
-  puts '######### Station List ###########'
+  puts 'Station List:'
   puts "\t!!EMPTY!!" if stations.empty?
   stations.each_with_index do |s, i| puts "\t#{i + 1}. #{s.show_title.capitalize}."
   end
-  puts '##################################'
-  puts '######### Trains List ############'
+  puts ""
+  puts 'Trains List:'
   puts "\t!!EMPTY!!" if trains.empty?
   trains.each_with_index do |t, i| puts "\t#{i + 1}. #{t.type.to_s.capitalize} train, number #{t.number}, location - #{t.current_station.title.to_s}"
   end
