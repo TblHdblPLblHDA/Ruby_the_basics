@@ -9,7 +9,5 @@ require_relative 'railway_wagon_cargo'
 require_relative 'interface'
 
 interface = Interface.new
+interface.start
 
-loop do
-  interface.start
-end
